@@ -23,7 +23,7 @@
 
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="password" name="senha" placeholder='Senha' class="form-control">
+                                <input type="password" name="password" placeholder='Senha' class="form-control">
                             </div>
                         </div>
 

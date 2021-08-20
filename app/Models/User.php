@@ -18,27 +18,36 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
+        'id',
         'password',
+        'nivel',
+        'nome_usuario'
     ];
+
+    protected $table = 'ciregm_usuarios';
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
+
+    /*
     protected $hidden = [
         'password',
         'remember_token',
     ];
+    */
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
+    /*
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    */
 }
