@@ -21,6 +21,18 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            /*
+            $table->unsignedBigInteger('id')->unique();
+            $table->string('password', 50);
+            $table->string('nivel', 10);
+            $table->string('nome', 120);
+            $table->rememberToken();
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->primary('id');
+            */
         });
     }
 
