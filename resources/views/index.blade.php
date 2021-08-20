@@ -17,14 +17,16 @@
 
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" name="id" placeholder='Usuario' class="form-control">
+                                <input type="text" name="id" placeholder='Usuario' class="form-control" value="{{ old('id') ?? "" }}">
                             </div>
+                            {{ $errors->has('id') ? $errors->first('id') : '' }}
                         </div>
 
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="password" name="password" placeholder='Senha' class="form-control">
+                                <input type="password" name="password" placeholder='Senha' class="form-control" value="{{ old('password') ?? "" }}">
                             </div>
+                            {{ $errors->has('password') ? $errors->first('password') : '' }}
                         </div>
 
                         <div class="form-group">
@@ -33,6 +35,7 @@
                             </div>
                         </div>
                     </form>
+                    {{ isset($erro) && $erro != '' ? $erro : ''}}
                 </div>
             </div>
         </div>
