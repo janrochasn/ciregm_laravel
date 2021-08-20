@@ -23,6 +23,38 @@
 }
 */
 
+html{
+    height: 100%;
+}
+
+body{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contente{
+    flex: 1;
+}
+
+.box-botoes{
+    margin-top: 5%;
+  }
+
+.botao{
+    background-color: #4F4F4F !important;
+    color: white !important;
+}
+
+.btn-menu{
+    min-width:150px;
+    margin-bottom: 24px;
+}
+
+.fundo{
+    background-color: #363636 !important;
+}
+
 .container-login {
     width: 100vw;
     height: 100vh;
@@ -37,7 +69,18 @@
     height: 300px;
     }
 
-.botao-login{
-    background-color: #4F4F4F !important;
-    color: white !important;
+.label-header{
+    color: white
     }
+
+.itensFormCarimbo {
+    display: inline-block;
+    width: 150px;
+    padding-left: 70px;
+}
+
+.radioGroup {
+    display: inline-block;
+    width: 150px;
+    padding-left: 70px;
+}
