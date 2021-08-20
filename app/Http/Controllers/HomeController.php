@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index(Request $request) {
-        $erro = '';
-
-        if($request->get('erro') == 1) {
-            $erro = 'Usuário e/ou senha não existe';
+        if(Auth::check()) {
+            return redirect()->route('atividades.index');
         }
-        return view('index', ['erro' => $erro]);
+        return view('index');
     }
 }
