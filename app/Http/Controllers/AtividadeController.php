@@ -11,7 +11,9 @@ class AtividadeController extends Controller
     }
 
     public function aberturaSas() {
-        return 'Abertura Sas';
+        
+        $teste['resposta'] = 'Requisição feita com sucesso';
+        echo json_encode($teste);
     }
 
     public function alteracaoSas() {

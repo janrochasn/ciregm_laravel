@@ -553,5 +553,41 @@
 
     <div class='contente'></div>
 
+    <script src="{{ asset('js/jquery.js') }}" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+        //Abertura
+        $('#abertura-parcial').click(function() {
+            if ($('#abertura-parcial').prop('checked')) {
+                $('#input-abertura-descricao-afetacao').show();
+            };
+        });
 
+        $('#abertura-total').click(function() {
+            if ($('#abertura-total').prop('checked')) {
+                $('#input-abertura-descricao-afetacao').hide();
+            };
+        });
+
+        $("#form_carimbo_abertura").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "{{ route('atividades.abertura.sas') }}",
+                dataType: "json",
+                data: $(this).serialize(),
+
+                success: function(request) {
+                    console.log(request);
+                },
+
+                error: function(error) {
+                    console.log(error)
+                }
+
+            });
+        });
+        //Fim Abertura
+    </script>
 @endsection

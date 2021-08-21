@@ -19,7 +19,11 @@
                         <input type="text" name="id" placeholder='Usuario' class="form-control"
                             value="{{ old('id') ?? '' }}" required>
                     </div>
-                    {{ $errors->has('id') ? $errors->first('id') : '' }}
+                    @if ($errors->has('id'))
+                        <div style="color: orange">
+                            {{ $errors->first('id') }}
+                        </div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -27,7 +31,11 @@
                         <input type="password" name="password" placeholder='Senha' class="form-control"
                             value="{{ old('password') ?? '' }}" required>
                     </div>
-                    {{ $errors->has('password') ? $errors->first('password') : '' }}
+                    @if ($errors->has('password'))
+                        <div style="color: orange">
+                            {{ $errors->first('password') }}
+                        </div>
+                    @endif
                 </div>
 
                 <div class="form-group">
