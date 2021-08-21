@@ -81,6 +81,7 @@
                 </div>
                 <div class="modal-body fundo">
                     <form id="form_carimbo_abertura" method="post">
+                        @csrf
                         <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="tipo_carimbo" value="ABERTURA">
                         <div class="form-group form-inline">
@@ -146,6 +147,7 @@
                 </div>
                 <div class="modal-body fundo">
                     <form id="form_carimbo_alteracao" method="post">
+                        @csrf
                         <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="tipo_carimbo" value="ALTERACAO">
                         <div class="form-group form-inline">
@@ -217,6 +219,7 @@
                 </div>
                 <div class="modal-body fundo">
                     <form id="form_carimbo_testes" method="post">
+                        @csrf
                         <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="tipo_carimbo" value="TESTES">
                         <div class="form-group form-inline">
@@ -274,6 +277,7 @@
                 </div>
                 <div class="modal-body fundo">
                     <form id="form_carimbo_escalonamento" method="post">
+                        @csrf
                         <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="tipo_carimbo" value="ESCALONAMENTO">
                         <div class="form-group form-inline">
@@ -352,6 +356,7 @@
                 </div>
                 <div class="modal-body fundo">
                     <form id="form_carimbo_atualizacao" method="post">
+                        @csrf
                         <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="tipo_carimbo" value="ATUALIZACAO">
                         <div class="form-group form-inline">
@@ -407,6 +412,7 @@
                 </div>
                 <div class="modal-body fundo">
                     <form id="form_carimbo_ligacao" method="post">
+                        @csrf
                         <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="tipo_carimbo" value="LIGACAO">
                         <div class="form-group form-inline">
@@ -483,6 +489,7 @@
                 </div>
                 <div class="modal-body fundo">
                     <form id="form_carimbo_falha_sistemica" method="post">
+                        @csrf
                         <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="tipo_carimbo" value="FALHA SISTEMICA">
                         <div class="form-group form-inline">

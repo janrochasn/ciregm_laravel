@@ -13,7 +13,7 @@ $("#form_carimbo_abertura").submit(function (e) {
     e.preventDefault();
     $.ajax({
         type: "post",
-        url: "carimbo_abertura.php",
+        url: "{{ route('atividades.abertura.sas')}}",
         dataType: "json",
         data: $(this).serialize(),
         beforeSend: function () {
