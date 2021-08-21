@@ -32,7 +32,7 @@
 
                 <div class="form-group">
                     <div class="col text-center">
-                        <button type="submit" class="btn botao-login">Login</button>
+                        <button type="submit" class="btn botao">Login</button>
                     </div>
                 </div>
             </form>

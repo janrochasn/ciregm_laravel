@@ -1,4 +1,4 @@
-@extends('layout.layout_carimbos')
+@extends('layout.basico_atividades')
 @section('title', 'CIREGM')
 
 @section('content')
@@ -15,7 +15,7 @@
                     </li>
                     <li class="nav-item">
                         <a href='javascript:logout.submit()' class="nav-link">Sair</a>
-                        <form name='logout' method="post" action='{{route('logout')}}'>
+                        <form name='logout' method="post" action='{{ route('logout') }}'>
                             @csrf
                         </form>
                     </li>
