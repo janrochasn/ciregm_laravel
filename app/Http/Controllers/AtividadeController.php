@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AtividadeController extends Controller
 {
@@ -10,10 +11,25 @@ class AtividadeController extends Controller
         return view('app.atividades');
     }
 
-    public function aberturaSas() {
-        
-        $teste['resposta'] = 'Requisição feita com sucesso';
-        echo json_encode($teste);
+    public function aberturaSas(Request $request) {
+
+        $id_usuario = Auth::user()->id;
+        $tipo_carimbo = 'ABERTURA';
+        date_default_timezone_set('America/Sao_Paulo');
+        $data_hora = date("d/m/Y H:i:s");
+
+
+        $rules = [
+            '',
+        ];
+
+        $feedback = [
+            '',
+        ];
+
+
+        //echo json_encode($request->all());
+        return response()->json($request->all());
     }
 
     public function alteracaoSas() {

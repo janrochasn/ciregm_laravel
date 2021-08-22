@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('ciregm_usuarios', function (Blueprint $table) {
             /*
             $table->id();
             $table->string('name');
@@ -28,9 +28,9 @@ class CreateUsersTable extends Migration
             $table->string('password', 200);
             $table->string('nivel', 255);
             $table->string('nome_usuario', 255);
-            $table->rememberToken();
-            $table->timestamps();
-            $table->softDeletes();
+            //$table->rememberToken();
+            //$table->timestamps();
+            //$table->softDeletes();
 
             $table->primary('id');
             
@@ -44,6 +44,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('ciregm_usuarios');
     }
 }
