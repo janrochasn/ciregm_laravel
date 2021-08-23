@@ -82,27 +82,25 @@
                 <div class="modal-body fundo">
                     <form id="form_carimbo_abertura" method="post">
                         @csrf
-                        <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="tipo_carimbo" value="ABERTURA">
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo" for="ocorrencia_abertura_sas">Ocorrência:&nbsp;</label>
                             <input type="text" name="abertura_nm_ocorrencia" id="ocorrencia_abertura_sas"
-                                class="form-control" style="min-width:215px;" required>
+                                class="form-control" style="min-width:215px;" >
                         </div>
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo" for="abertura-sas">SAS:</label>
                             <input type="text" name="abertura_nm_sas" id="abertura-sas" class="form-control"
-                                style="min-width:215px;" required>
+                                style="min-width:215px;" >
                         </div>
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo"></label>
                             <label class="form-check-label" for="abertura-total">Total&nbsp;</label>
                             <input class="form-check-input" type="radio" name="abertura_tipo_afetacao"
-                                value="Total (X) Parcial ( )" id="abertura-total" required>
+                                value="Total" id="abertura-total" >
                             &nbsp &nbsp
                             <label class="form-check-label" for="abertura-parcial">Parcial&nbsp;</label>
                             <input class="form-check-input" type="radio" name="abertura_tipo_afetacao"
-                                value="Total ( ) Parcial (X)" id="abertura-parcial" required>
+                                value="Parcial" id="abertura-parcial" >
                         </div>
                         <div class="form-group form-inline" id="input-abertura-descricao-afetacao" style="display:none;">
                             <label class="itensFormCarimbo" for="abertura-afetacao">Afetação:</label>
@@ -553,7 +551,7 @@
 
     <div class='contente'></div>
 
-    <script src="{{ asset('js/jquery.js') }}" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script>
@@ -575,15 +573,27 @@
             $.ajax({
                 type: "post",
                 url: "{{ route('atividades.abertura.sas') }}",
-                dataType: "json",
                 data: $(this).serialize(),
 
-                success: function(request) {
-                    console.log(request);
+                beforeSend: function () {
+                    $("#btnGerarCarimboAbertura").hide();
+                    $('#divCarimboAberturaGerado').show();
+                    $('#carimbo_abertura_gerado').html('Aguarde enquanto o seu carimbo é gerado...');
                 },
 
-                error: function(error) {
-                    console.log(error)
+                success: function (response) {
+                    console.log(response)
+                    $('#carimbo_abertura_gerado').empty();
+                    $('#carimbo_abertura_gerado').html(response.carimbo);
+                    $("#btnGerarCarimboAbertura").show();
+                    $("#form_carimbo_abertura").trigger("reset");
+                    $('#input-abertura-descricao-afetacao').hide();
+                },
+                error: function (data) { // error callback 
+                       var errors = data.responseJSON;
+                       console.log(errors);
+                    $("#btnGerarCarimboAbertura").show();
+                    $('#carimbo_abertura_gerado').html('Houve um erro, por favor tente novamente');
                 }
 
             });

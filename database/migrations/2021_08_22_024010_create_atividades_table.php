@@ -14,7 +14,7 @@ class CreateAtividadesTable extends Migration
     public function up()
     {
         Schema::create('ciregm_atividades', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id_atividade')->autoIncrement()->primary();
             $table->unsignedBigInteger('usuario_id');
             $table->string('tipo_carimbo', 120);
             $table->string('data_hora', 20);

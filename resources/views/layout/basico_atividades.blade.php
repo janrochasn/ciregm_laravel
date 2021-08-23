@@ -11,7 +11,7 @@
 
 <html>
 
-<body class="text-white " style="background-color: #363636 !important;">
+<body class="text-white" style="background-color: #363636 !important;">
     @yield('content')
 </body>
 

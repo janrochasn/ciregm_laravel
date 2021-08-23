@@ -9,6 +9,7 @@ class Atividade extends Model
 {
     use HasFactory;
 
-    protected $table = ['ciregm_atividades'];
+    protected $table = 'ciregm_atividades';
     protected $fillable = ['id_usuario', 'tipo_carimbo', 'data_hora', 'nm_ocorrencia', 'carimbo'];
+    public $timestamps = false;
 }
