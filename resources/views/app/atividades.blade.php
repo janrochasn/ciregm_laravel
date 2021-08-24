@@ -83,24 +83,24 @@
                     <form id="form_carimbo_abertura" method="post">
                         @csrf
                         <div class="form-group form-inline">
-                            <label class="itensFormCarimbo" for="ocorrencia_abertura_sas">Ocorrência:&nbsp;</label>
-                            <input type="text" name="abertura_nm_ocorrencia" id="ocorrencia_abertura_sas"
-                                class="form-control" style="min-width:215px;" >
+                            <label class="itensFormCarimbo" for="abertura_nm_ocorrencia">Ocorrência:&nbsp;</label>
+                            <input type="text" name="abertura_nm_ocorrencia" id="abertura_nm_ocorrencia"
+                                class="form-control" style="min-width:215px;" required>
                         </div>
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo" for="abertura-sas">SAS:</label>
                             <input type="text" name="abertura_nm_sas" id="abertura-sas" class="form-control"
-                                style="min-width:215px;" >
+                                style="min-width:215px;" required>
                         </div>
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo"></label>
                             <label class="form-check-label" for="abertura-total">Total&nbsp;</label>
-                            <input class="form-check-input" type="radio" name="abertura_tipo_afetacao"
-                                value="Total" id="abertura-total" >
+                            <input class="form-check-input" type="radio" name="abertura_tipo_afetacao" value="Total"
+                                id="abertura-total" required>
                             &nbsp &nbsp
                             <label class="form-check-label" for="abertura-parcial">Parcial&nbsp;</label>
-                            <input class="form-check-input" type="radio" name="abertura_tipo_afetacao"
-                                value="Parcial" id="abertura-parcial" >
+                            <input class="form-check-input" type="radio" name="abertura_tipo_afetacao" value="Parcial"
+                                id="abertura-parcial" required>
                         </div>
                         <div class="form-group form-inline" id="input-abertura-descricao-afetacao" style="display:none;">
                             <label class="itensFormCarimbo" for="abertura-afetacao">Afetação:</label>
@@ -570,30 +570,30 @@
 
         $("#form_carimbo_abertura").submit(function(e) {
             e.preventDefault();
+
             $.ajax({
                 type: "post",
                 url: "{{ route('atividades.abertura.sas') }}",
                 data: $(this).serialize(),
-
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#btnGerarCarimboAbertura").hide();
                     $('#divCarimboAberturaGerado').show();
                     $('#carimbo_abertura_gerado').html('Aguarde enquanto o seu carimbo é gerado...');
                 },
-
-                success: function (response) {
-                    console.log(response)
+                success: function(response) {
                     $('#carimbo_abertura_gerado').empty();
                     $('#carimbo_abertura_gerado').html(response.carimbo);
                     $("#btnGerarCarimboAbertura").show();
                     $("#form_carimbo_abertura").trigger("reset");
                     $('#input-abertura-descricao-afetacao').hide();
                 },
-                error: function (data) { // error callback 
-                       var errors = data.responseJSON;
-                       console.log(errors);
+                error: function(xhr) {
+                    $('#carimbo_abertura_gerado').empty();
                     $("#btnGerarCarimboAbertura").show();
-                    $('#carimbo_abertura_gerado').html('Houve um erro, por favor tente novamente');
+                    $('#divCarimboAberturaGerado').hide();
+                    $.each(xhr.responseJSON.errors, function(key, value) {
+                        alert(value)
+                    });
                 }
 
             });

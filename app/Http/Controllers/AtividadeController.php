@@ -50,8 +50,16 @@ class AtividadeController extends Controller
 
         //mensagens de validação
         $feedback = [
-            'required' => 'Campo de preenchimento obrigatório.',
-            'max' => 'O campo deve possuir no máximo :max caracteres.'
+            'abertura_nm_ocorrencia.required' => 'O campo ocorrência deve ser preenchido.',
+            'abertura_nm_sas.required' => 'O campo SAS deve ser preenchido.',
+            'abertura_tipo_afetacao.required' => 'Campo de preenchimento obrigatório.',
+            'abertura_tipo_afetacao.required' => 'Favor informar o tipo de afetação.',
+            'abertura_descricao_afetacao.required' => 'Campo afetação é de preenchimento obrigatório.',
+            'abertura_nm_ocorrencia.max' => 'O campo ocorrência deve possuir no máximo :max caracteres.',
+            'abertura_nm_sas.max' => 'O campo SAS deve possuir no máximo :max caracteres.',
+            'abertura_tipo_afetacao.max' => 'O campo tipo afetação deve possuir no máximo :max caracteres.',
+            'abertura_descricao_afetacao.max' => 'O campo afetação deve possuir no máximo :max caracteres.',
+            'abertura_observacao.max' => 'O campo observação deve possuir no máximo :max caracteres.'
         ];
 
         //índice acrescentado no request para inserção na coluna carimbo no banco de dados
