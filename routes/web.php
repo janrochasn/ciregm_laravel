@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AtividadeController;
+use App\Http\Controllers\AberturaSasController;
+use App\Http\Controllers\AlteracaoSasController;
+use App\Http\Controllers\AtualizacaoController;
+use App\Http\Controllers\EscalonamentoController;
+use App\Http\Controllers\FalhaSistemicaController;
+use App\Http\Controllers\LigacaoControllerController;
+use App\Http\Controllers\TesteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +33,10 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/atividades', [AtividadeController::class, 'index'])->name('atividades.index')->middleware('auth');
-Route::post('/atividades/abertura-sas', [AtividadeController::class, 'aberturaSas'])->name('atividades.abertura.sas');
-Route::post('/atividades/alteracao-sas', [AtividadeController::class, 'alteracaoSas'])->name('atividades.alteracao.sas')->middleware('auth');
-Route::post('/atividades/testes', [AtividadeController::class, 'testes'])->name('atividades.testes')->middleware('auth');
-Route::post('/atividades/escalonamento', [AtividadeController::class, 'escalonamento'])->name('atividades.escalonamento')->middleware('auth');
-Route::post('/atividades/atualizacao', [AtividadeController::class, 'atualizacao'])->name('atividades.atualizacao')->middleware('auth');
-Route::post('/atividades/ligacao', [AtividadeController::class, 'ligacao'])->name('atividades.ligacao')->middleware('auth');
-Route::post('/atividades/falha-sistemica', [AtividadeController::class, 'falhaSistemica'])->name('atividades.falha.sistemica')->middleware('auth');
+Route::post('/atividades/abertura-sas', [AberturaSasController::class, 'index'])->name('atividades.abertura.sas')->middleware('auth');
+Route::post('/atividades/alteracao-sas', [AlteracaoSasController::class, 'index'])->name('atividades.alteracao.sas')->middleware('auth');
+Route::post('/atividades/testes', [TesteController::class, 'index'])->name('atividades.testes')->middleware('auth');
+Route::post('/atividades/escalonamento', [EscalonamentoController::class, 'index'])->name('atividades.escalonamento')->middleware('auth');
+Route::post('/atividades/atualizacao', [AtualizacaoController::class, 'index'])->name('atividades.atualizacao')->middleware('auth');
+Route::post('/atividades/ligacao', [LigacaoControllerController::class, 'index'])->name('atividades.ligacao')->middleware('auth');
+Route::post('/atividades/falha-sistemica', [FalhaSistemicaController::class, 'index'])->name('atividades.falha.sistemica')->middleware('auth');

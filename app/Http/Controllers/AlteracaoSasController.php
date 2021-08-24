@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Atividade;
 
-class AtividadeController extends Controller
+class AlteracaoSasController extends Controller
 {
-    public function index() {
-        return view('app.atividades');
+    public function index(Request $request) {
+        //
     }
-    
 }
