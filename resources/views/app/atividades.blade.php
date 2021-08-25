@@ -146,8 +146,6 @@
                 <div class="modal-body fundo">
                     <form id="form_carimbo_alteracao" method="post">
                         @csrf
-                        <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="tipo_carimbo" value="ALTERACAO">
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo" for="ocorrencia_alteracao_sas">Ocorrência:&nbsp;</label>
                             <input type="text" name="alteracao_nm_ocorrencia" id="ocorrencia_alteracao_sas"
@@ -561,16 +559,13 @@
                 $('#input-abertura-descricao-afetacao').show();
             };
         });
-
         $('#abertura-total').click(function() {
             if ($('#abertura-total').prop('checked')) {
                 $('#input-abertura-descricao-afetacao').hide();
             };
         });
-
         $("#form_carimbo_abertura").submit(function(e) {
             e.preventDefault();
-
             $.ajax({
                 type: "post",
                 url: "{{ route('atividades.abertura.sas') }}",
@@ -595,9 +590,50 @@
                         alert(value)
                     });
                 }
-
             });
         });
         //Fim Abertura
+
+        //Alteração
+        $('#alteracao-parcial').click(function() {
+            if ($('#alteracao-parcial').prop('checked')) {
+                $('#input-alteracao-descricao-afetacao').show();
+            };
+        });
+        $('#alteracao-total').click(function() {
+            if ($('#alteracao-total').prop('checked')) {
+                $('#input-alteracao-descricao-afetacao').hide();
+            };
+        });
+        $("#form_carimbo_alteracao").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "{{ route('atividades.alteracao.sas') }}",
+                dataType: "json",
+                data: $(this).serialize(),
+                beforeSend: function() {
+                    $("#btnGerarCarimboAlteracao").hide();
+                    $('#divCarimboAlteracaoGerado').show();
+                    $('#carimbo_alteracao_gerado').html('Aguarde enquanto o seu carimbo é gerado...');
+                },
+                success: function(response) {
+                    $('#carimbo_alteracao_gerado').empty();
+                    $('#carimbo_alteracao_gerado').html(response.carimbo);
+                    $("#btnGerarCarimboAlteracao").show();
+                    $("#form_carimbo_alteracao").trigger("reset");
+                    $('#input-alteracao-descricao-afetacao').hide();
+                },
+                error: function(xhr) {
+                    $('#carimbo_alteracao_gerado').empty();
+                    $("#btnGerarCarimboAlteracao").show();
+                    $('#divCarimboAlteracaoGerado').hide();
+                    $.each(xhr.responseJSON.errors, function(key, value) {
+                        alert(value)
+                    });
+                }
+            });
+        });
+        //Fim Alteração
     </script>
 @endsection
