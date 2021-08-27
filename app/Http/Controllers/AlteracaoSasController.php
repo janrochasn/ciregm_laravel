@@ -15,6 +15,7 @@ class AlteracaoSasController extends Controller
         $data_hora = date("d/m/Y H:i:s");
         $alteracao_nm_ocorrencia = $request->alteracao_nm_ocorrencia;
         $alteracao_nm_sas = $request->alteracao_nm_sas;
+        $alteracao_solicitante = $request->alteracao_solicitante;
         $alteracao_tipo_afetacao = "";
         $alteracao_descricao_afetacao = $request->alteracao_descricao_afetacao;
         $alteracao_observacao = $request->alteracao_observacao;
@@ -25,6 +26,7 @@ class AlteracaoSasController extends Controller
             $rules = [
                 'alteracao_nm_ocorrencia' => 'required|max:100',
                 'alteracao_nm_sas' => 'required|max:100',
+                'alteracao_solicitante' => 'required|max:100',
                 'alteracao_tipo_afetacao' => 'required|max:100',
                 'alteracao_descricao_afetacao' => 'required|max:100',
                 'alteracao_observacao' => 'max:300'
@@ -37,6 +39,7 @@ class AlteracaoSasController extends Controller
             $rules = [
                 'alteracao_nm_ocorrencia' => 'required|max:100',
                 'alteracao_nm_sas' => 'required|max:100',
+                'alteracao_solicitante' => 'required|max:100',
                 'alteracao_tipo_afetacao' => 'required|max:100',
                 'alteracao_observacao' => 'max:300'
             ];
@@ -46,18 +49,19 @@ class AlteracaoSasController extends Controller
         $feedback = [
             'alteracao_nm_ocorrencia.required' => 'O campo ocorrência deve ser preenchido.',
             'alteracao_nm_sas.required' => 'O campo SAS deve ser preenchido.',
-            'alteracao_tipo_afetacao.required' => 'Campo de preenchimento obrigatório.',
+            'alteracao_solicitante.required' => 'Informar o solicitante.',
             'alteracao_tipo_afetacao.required' => 'Favor informar o tipo de afetação.',
             'alteracao_descricao_afetacao.required' => 'Campo afetação é de preenchimento obrigatório.',
             'alteracao_nm_ocorrencia.max' => 'O campo ocorrência deve possuir no máximo :max caracteres.',
             'alteracao_nm_sas.max' => 'O campo SAS deve possuir no máximo :max caracteres.',
+            'alteracao_solicitante.max' => 'O campo solicitante deve possuir no máximo :max caracteres.',
             'alteracao_tipo_afetacao.max' => 'O campo tipo afetação deve possuir no máximo :max caracteres.',
             'alteracao_descricao_afetacao.max' => 'O campo afetação deve possuir no máximo :max caracteres.',
             'alteracao_observacao.max' => 'O campo observação deve possuir no máximo :max caracteres.'
         ];
 
         //índice acrescentado no request para inserção na coluna carimbo no banco de dados
-        $carimbo = $tipo_carimbo. ' /Ocorrência: '.$alteracao_nm_ocorrencia. ' /SAS: '.$alteracao_nm_sas. ' /'.$alteracao_tipo_afetacao. ' /Obs: '.$alteracao_observacao;
+        $carimbo = $tipo_carimbo. ' /Ocorrência: '.$alteracao_nm_ocorrencia. ' /SAS: '.$alteracao_nm_sas. ' /Solicitante: '.$alteracao_solicitante. ' /'.$alteracao_tipo_afetacao. ' /Obs: '.$alteracao_observacao;
 
         //validação dos requests
         $request->validate($rules, $feedback);
@@ -72,18 +76,9 @@ class AlteracaoSasController extends Controller
         $atividade->nm_ocorrencia = $alteracao_nm_ocorrencia;
         $atividade->carimbo = $carimbo;
         $atividade->save();
-        /*
-        $atividade->save([
-            'id_usuario' => $id_usuario,
-            'tipo_carimbo' => $tipo_carimbo,
-            'data_hora' => $data_hora,
-            'nm_ocorrencia' => $alteracao_nm_ocorrencia,
-            'carimbo' => $carimbo
-        ]);
-        */
 
         //carimbo para resposta (retorno ao usuário)
-        $response['carimbo'] = "#Alteração SAS\nSAS: $alteracao_nm_sas\n$alteracao_tipo_afetacao Afetação: $alteracao_descricao_afetacao\nObs: $alteracao_observacao";
+        $response['carimbo'] = "#Alteração SAS\nSAS: $alteracao_nm_sas\nSolicitante: $alteracao_solicitante\n$alteracao_tipo_afetacao Afetação: $alteracao_descricao_afetacao\nObs: $alteracao_observacao";
 
         return response()->json($response);
     }

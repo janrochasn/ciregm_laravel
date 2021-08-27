@@ -164,12 +164,11 @@
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo"></label>
                             <label for="alteracao-total">Total&nbsp;</label>
-                            <input type="radio" name="alteracao_tipo_afetacao" value="Total (X) Parcial ( )"
-                                id="alteracao-total" required>
+                            <input type="radio" name="alteracao_tipo_afetacao" value="Total" id="alteracao-total" required>
                             &nbsp &nbsp
                             <label for="alteracao-parcial">Parcial&nbsp;</label>
-                            <input type="radio" name="alteracao_tipo_afetacao" value="Total ( ) Parcial (X)"
-                                id="alteracao-parcial" required>
+                            <input type="radio" name="alteracao_tipo_afetacao" value="Parcial" id="alteracao-parcial"
+                                required>
                         </div>
                         <div class="form-group form-inline" id="input-alteracao-descricao-afetacao" style="display:none;">
                             <label class="itensFormCarimbo" for="alteracao-afetacao">Afetação:</label>
@@ -216,8 +215,6 @@
                 <div class="modal-body fundo">
                     <form id="form_carimbo_testes" method="post">
                         @csrf
-                        <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="tipo_carimbo" value="TESTES">
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo" for="teste_ocorrencia">Ocorrência:&nbsp;&nbsp;</label>
                             <input class="form-control" type="text" name="teste_ocorrencia" id="teste_ocorrencia"
@@ -231,10 +228,10 @@
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo"></label>
                             <label for="teste-ok">OK&nbsp;</label>
-                            <input type="radio" name="teste_resultado" value="OK (X) NOK ( )" id="teste-ok" required>
+                            <input type="radio" name="teste_resultado" value="OK" id="teste-ok" required>
                             &nbsp &nbsp
                             <label for="teste-nok">NOK&nbsp;</label>
-                            <input type="radio" name="teste_resultado" value="OK ( ) NOK (X)" id="teste-nok" required>
+                            <input type="radio" name="teste_resultado" value="NOK" id="teste-nok" required>
                         </div>
                         <div class="form-group form-inline">
                             <label class="itensFormCarimbo" for="teste-observacao">Obs:</label>
@@ -635,5 +632,39 @@
             });
         });
         //Fim Alteração
+
+        //Testes
+        $("#form_carimbo_testes").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "{{ route('atividades.teste') }}",
+                dataType: "json",
+                data: $(this).serialize(),
+                beforeSend: function() {
+                    $("#btnGerarCarimboTestes").hide();
+                    $('#divCarimboTestesGerado').show();
+                    $('#carimbo_testes_gerado').html('Aguarde enquanto o seu carimbo é gerado...');
+                },
+                success: function(response) {
+                    $('#carimbo_testes_gerado').empty();
+                    $('#carimbo_testes_gerado').html(response.carimbo);
+                    $('#btnGerarCarimboTestes').show();
+                    $("#form_carimbo_testes").trigger("reset");
+                },
+                error: function(xhr) {
+                    $('#carimbo_testes_gerado').empty();
+                    $("#btnGerarCarimboTestes").show();
+                    $('#divCarimboTestesGerado').hide();
+                    $.each(xhr.responseJSON.errors, function(key, value) {
+                        alert(value)
+                    });
+                }
+            });
+        });
+        $(document).on('click', '#form_carimbo_testes', function(e) {
+            $('#divCarimboTestesGerado').hide();
+        });
+        //Fim Testes
     </script>
 @endsection

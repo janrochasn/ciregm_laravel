@@ -35,7 +35,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/atividades', [AtividadeController::class, 'index'])->name('atividades.index')->middleware('auth');
 Route::post('/atividades/abertura-sas', [AberturaSasController::class, 'index'])->name('atividades.abertura.sas')->middleware('auth');
 Route::post('/atividades/alteracao-sas', [AlteracaoSasController::class, 'index'])->name('atividades.alteracao.sas')->middleware('auth');
-Route::post('/atividades/testes', [TesteController::class, 'index'])->name('atividades.testes')->middleware('auth');
+Route::post('/atividades/teste', [TesteController::class, 'index'])->name('atividades.teste')->middleware('auth');
 Route::post('/atividades/escalonamento', [EscalonamentoController::class, 'index'])->name('atividades.escalonamento')->middleware('auth');
 Route::post('/atividades/atualizacao', [AtualizacaoController::class, 'index'])->name('atividades.atualizacao')->middleware('auth');
 Route::post('/atividades/ligacao', [LigacaoControllerController::class, 'index'])->name('atividades.ligacao')->middleware('auth');
